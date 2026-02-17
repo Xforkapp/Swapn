@@ -140,7 +140,7 @@ export const MY_ITEMS: Item[] = [
     },
     {
         id: 'my-item-2',
-        image: 'https://images.unsplash.com/photo-1546868871-af0de0ae72be?w=600&h=800&fit=crop',
+        image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&h=800&fit=crop',
         title: 'スマートウォッチ',
         rank: 'B',
         estimatedPrice: 28000,

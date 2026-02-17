@@ -61,39 +61,39 @@ export default function Home() {
     return (
         <div className="h-full flex flex-col">
             {/* My Item Selector */}
-            <div className="px-5 pt-5 pb-3">
+            <div className="px-4 pt-3 pb-2">
                 <button
                     onClick={cycleMyItem}
-                    className="w-full flex items-center gap-3 p-2.5 rounded-2xl bg-primary/5 hover:bg-primary/10 transition-colors border border-primary/10"
+                    className="w-full flex items-center gap-2.5 p-2 rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors border border-primary/10"
                 >
                     <img
                         src={selectedMyItem.image}
                         alt={selectedMyItem.title}
-                        className="w-11 h-11 rounded-xl object-cover border border-white shadow-sm"
+                        className="w-9 h-9 rounded-lg object-cover border border-white shadow-sm"
                     />
                     <div className="flex-1 text-left min-w-0">
-                        <p className="text-sm font-semibold text-slate-800 truncate">{selectedMyItem.title}</p>
-                        <p className="text-[10px] text-muted-foreground">¥{selectedMyItem.estimatedPrice.toLocaleString()} • ランク {selectedMyItem.rank}</p>
+                        <p className="text-xs font-semibold text-slate-800 truncate">{selectedMyItem.title}</p>
+                        <p className="text-[9px] text-muted-foreground">¥{selectedMyItem.estimatedPrice.toLocaleString()} • ランク {selectedMyItem.rank}</p>
                     </div>
                     <div className="flex items-center gap-1 text-primary/60">
-                        <Repeat className="w-4 h-4" />
-                        <span className="text-[10px] font-medium">変更</span>
+                        <Repeat className="w-3.5 h-3.5" />
+                        <span className="text-[9px] font-medium">変更</span>
                     </div>
                 </button>
             </div>
 
             {/* Card Stack */}
-            <div className="flex-1 relative flex items-center justify-center px-5 pb-3">
+            <div className="flex-1 relative flex items-center justify-center px-4 pb-2">
                 {availableItems.length === 0 ? (
                     <div className="text-center">
-                        <div className="w-20 h-20 rounded-full bg-primary/5 mx-auto mb-4 flex items-center justify-center">
-                            <Sparkles className="w-8 h-8 text-accent" />
+                        <div className="w-16 h-16 rounded-full bg-primary/5 mx-auto mb-3 flex items-center justify-center">
+                            <Sparkles className="w-6 h-6 text-accent" />
                         </div>
-                        <p className="text-lg font-semibold text-slate-700">すべてチェック済み！</p>
-                        <p className="text-sm text-muted-foreground mt-1">新しいアイテムが追加されるのをお待ちください</p>
+                        <p className="text-base font-semibold text-slate-700">すべてチェック済み！</p>
+                        <p className="text-xs text-muted-foreground mt-1">新しいアイテムが追加されるのをお待ちください</p>
                     </div>
                 ) : (
-                    <div className="relative w-full aspect-[3/4] max-h-[55vh]">
+                    <div className="relative w-full aspect-[3/4] max-h-[50vh]">
                         {availableItems.slice(0, 3).map((item, index) => (
                             <SwipeCard
                                 key={item.id}
@@ -109,21 +109,21 @@ export default function Home() {
 
             {/* Action Buttons */}
             {availableItems.length > 0 && (
-                <div className="flex justify-center gap-6 px-5 pb-5">
+                <div className="flex justify-center gap-5 px-5 pb-3">
                     <Button
                         variant="outline"
-                        size="lg"
-                        className="w-16 h-16 rounded-full border-2 border-rose-200 hover:bg-rose-50 hover:border-rose-400 transition-all shadow-lg"
+                        size="sm"
+                        className="w-12 h-12 rounded-full border-2 border-rose-200 hover:bg-rose-50 hover:border-rose-400 transition-all shadow-md"
                         onClick={() => handleSwipe('left', availableItems[0].id)}
                     >
-                        <X className="w-7 h-7 text-rose-500" />
+                        <X className="w-5 h-5 text-rose-500" />
                     </Button>
                     <Button
-                        size="lg"
-                        className="w-16 h-16 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 transition-all shadow-lg shadow-emerald-200"
+                        size="sm"
+                        className="w-12 h-12 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 transition-all shadow-md shadow-emerald-200"
                         onClick={() => handleSwipe('right', availableItems[0].id)}
                     >
-                        <Heart className="w-7 h-7 text-white" fill="white" />
+                        <Heart className="w-5 h-5 text-white" fill="white" />
                     </Button>
                 </div>
             )}
