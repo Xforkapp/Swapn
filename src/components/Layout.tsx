@@ -24,9 +24,9 @@ export default function Layout() {
             </div>
 
             {/* Phone container */}
-            <div className="relative w-full max-w-[430px] min-h-screen md:min-h-0 md:h-[85vh] md:rounded-3xl md:shadow-2xl md:border md:border-white/30 bg-white overflow-hidden flex flex-col">
+            <div className="relative w-full max-w-[430px] h-dvh md:h-[85vh] md:rounded-3xl md:shadow-2xl md:border md:border-white/30 bg-white overflow-hidden flex flex-col">
                 {/* Page content */}
-                <main className="flex-1 overflow-y-auto overflow-x-hidden">
+                <main className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col">
                     <Outlet />
                 </main>
 

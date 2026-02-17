@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react';
 import { motion, useMotionValue, useTransform, animate, type PanInfo } from 'framer-motion';
-import { Heart, X, Star, Repeat, Sparkles } from 'lucide-react';
+import { Star, Repeat, Sparkles } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { useApp } from '@/context/AppContext';
@@ -60,30 +60,8 @@ export default function Home() {
 
     return (
         <div className="h-full flex flex-col">
-            {/* My Item Selector */}
-            <div className="px-4 pt-3 pb-2">
-                <button
-                    onClick={cycleMyItem}
-                    className="w-full flex items-center gap-2.5 p-2 rounded-xl bg-primary/5 hover:bg-primary/10 transition-colors border border-primary/10"
-                >
-                    <img
-                        src={selectedMyItem.image}
-                        alt={selectedMyItem.title}
-                        className="w-9 h-9 rounded-lg object-cover border border-white shadow-sm"
-                    />
-                    <div className="flex-1 text-left min-w-0">
-                        <p className="text-xs font-semibold text-slate-800 truncate">{selectedMyItem.title}</p>
-                        <p className="text-[9px] text-muted-foreground">¥{selectedMyItem.estimatedPrice.toLocaleString()} • ランク {selectedMyItem.rank}</p>
-                    </div>
-                    <div className="flex items-center gap-1 text-primary/60">
-                        <Repeat className="w-3.5 h-3.5" />
-                        <span className="text-[9px] font-medium">変更</span>
-                    </div>
-                </button>
-            </div>
-
             {/* Card Stack */}
-            <div className="flex-1 relative flex items-center justify-center px-4 pb-2">
+            <div className="flex-1 relative flex items-center justify-center px-3 pt-2 pb-1 min-h-0">
                 {availableItems.length === 0 ? (
                     <div className="text-center">
                         <div className="w-16 h-16 rounded-full bg-primary/5 mx-auto mb-3 flex items-center justify-center">
@@ -93,7 +71,7 @@ export default function Home() {
                         <p className="text-xs text-muted-foreground mt-1">新しいアイテムが追加されるのをお待ちください</p>
                     </div>
                 ) : (
-                    <div className="relative w-full aspect-[3/4] max-h-[50vh]">
+                    <div className="relative w-full h-full">
                         {availableItems.slice(0, 3).map((item, index) => (
                             <SwipeCard
                                 key={item.id}
@@ -107,24 +85,35 @@ export default function Home() {
                 )}
             </div>
 
-            {/* Action Buttons */}
+            {/* My Item Circle — replaces Like/Pass buttons */}
             {availableItems.length > 0 && (
-                <div className="flex justify-center gap-5 px-5 pb-3">
-                    <Button
-                        variant="outline"
-                        size="sm"
-                        className="w-12 h-12 rounded-full border-2 border-rose-200 hover:bg-rose-50 hover:border-rose-400 transition-all shadow-md"
-                        onClick={() => handleSwipe('left', availableItems[0].id)}
+                <div className="flex flex-col items-center pb-2 pt-1 flex-shrink-0">
+                    <motion.button
+                        onClick={cycleMyItem}
+                        whileTap={{ scale: 0.9 }}
+                        whileHover={{ scale: 1.05 }}
+                        className="relative group"
                     >
-                        <X className="w-5 h-5 text-rose-500" />
-                    </Button>
-                    <Button
-                        size="sm"
-                        className="w-12 h-12 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 hover:from-emerald-500 hover:to-teal-600 transition-all shadow-md shadow-emerald-200"
-                        onClick={() => handleSwipe('right', availableItems[0].id)}
-                    >
-                        <Heart className="w-5 h-5 text-white" fill="white" />
-                    </Button>
+                        {/* Outer ring glow */}
+                        <div className="absolute -inset-1 bg-gradient-to-br from-primary/30 to-accent/30 rounded-full blur-sm group-hover:blur-md transition-all" />
+                        {/* Circle image */}
+                        <div className="relative w-14 h-14 rounded-full overflow-hidden border-3 border-white shadow-lg">
+                            <motion.img
+                                key={selectedMyItem.id}
+                                initial={{ scale: 1.2, opacity: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                transition={{ duration: 0.25 }}
+                                src={selectedMyItem.image}
+                                alt={selectedMyItem.title}
+                                className="w-full h-full object-cover"
+                            />
+                        </div>
+                        {/* Cycle indicator */}
+                        <div className="absolute -bottom-0.5 -right-0.5 w-5 h-5 bg-white rounded-full shadow-md flex items-center justify-center">
+                            <Repeat className="w-2.5 h-2.5 text-primary" />
+                        </div>
+                    </motion.button>
+                    <p className="text-[10px] text-muted-foreground mt-1.5 font-medium">{selectedMyItem.title}</p>
                 </div>
             )}
 
