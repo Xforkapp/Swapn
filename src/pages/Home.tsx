@@ -79,6 +79,7 @@ export default function Home() {
                                 index={index}
                                 total={Math.min(availableItems.length, 3)}
                                 onSwipe={handleSwipe}
+                                onTap={(id) => navigate(`/item/${id}`)}
                             />
                         )).reverse()}
                     </div>
@@ -209,11 +210,13 @@ function SwipeCard({
     index,
     total,
     onSwipe,
+    onTap,
 }: {
     item: { id: string; image: string; title: string; rank: string; estimatedPrice: number; ownerId: string; description: string };
     index: number;
     total: number;
     onSwipe: (dir: 'left' | 'right', id: string) => void;
+    onTap: (id: string) => void;
 }) {
     const x = useMotionValue(0);
     const rotate = useTransform(x, [-200, 200], [-25, 25]);
@@ -253,6 +256,7 @@ function SwipeCard({
             dragConstraints={{ left: 0, right: 0, top: 0, bottom: 0 }}
             dragElastic={0.9}
             onDragEnd={isTop ? handleDragEnd : undefined}
+            onTap={isTop ? () => onTap(item.id) : undefined}
         >
             <div className="w-full h-full rounded-3xl overflow-hidden shadow-xl bg-white border border-slate-100 relative">
                 {/* Image */}

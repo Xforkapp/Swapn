@@ -1,12 +1,13 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
-import { Card } from '@/components/ui/card';
 import { useApp } from '@/context/AppContext';
+import { useNavigate } from 'react-router-dom';
 import { CURRENT_USER, MY_ITEMS, getUserById, getItemById } from '@/data/mock';
 import { Shield, Package } from 'lucide-react';
 
 export default function Profile() {
     const { matches } = useApp();
+    const navigate = useNavigate();
 
     const agreedMatches = matches.filter((m) => m.status === 'agreed' || m.status === 'fulfilled');
 
@@ -89,7 +90,11 @@ export default function Profile() {
                         {/* Instagram-style 3 column grid */}
                         <div className="grid grid-cols-3 gap-0.5">
                             {MY_ITEMS.map((item) => (
-                                <div key={item.id} className="relative aspect-square">
+                                <div
+                                    key={item.id}
+                                    className="relative aspect-square cursor-pointer hover:opacity-90 transition-opacity"
+                                    onClick={() => navigate(`/item/${item.id}`)}
+                                >
                                     <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                                     <div className="absolute top-1 right-1">
                                         <Badge className="bg-black/50 text-white border-0 text-[8px] px-1 py-0 font-bold backdrop-blur-sm">

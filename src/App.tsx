@@ -5,6 +5,9 @@ import Home from '@/pages/Home';
 import ChatList from '@/pages/ChatList';
 import ChatRoom from '@/pages/ChatRoom';
 import Profile from '@/pages/Profile';
+import Listing from '@/pages/Listing';
+import Settings from '@/pages/Settings';
+import ItemDetail from '@/pages/ItemDetail';
 
 function App() {
   return (
@@ -16,6 +19,9 @@ function App() {
             <Route path="/chat" element={<ChatList />} />
             <Route path="/chat/:matchId" element={<ChatRoom />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/listing" element={<Listing />} />
+            <Route path="/settings" element={<Settings />} />
+            <Route path="/item/:itemId" element={<ItemDetail />} />
           </Route>
         </Routes>
       </BrowserRouter>
@@ -24,3 +30,4 @@ function App() {
 }
 
 export default App;
+
